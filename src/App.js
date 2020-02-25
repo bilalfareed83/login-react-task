@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import User from './users'
+import Guest from './guest';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends Component {
+  state = {
+    isLogin: false
+  }
+
+  clickLogin = () => {
+    console.log('You are Login')
+    this.setState({ isLogin: true })
+  }
+
+  
+  clickLogout = () => {
+    console.log('You are Logout')
+    this.setState({ isLogin: false })
+  }
+
+
+  render() {
+    console.log(this.state.isLogin)
+    return (
+      <div>
+        { this.state.isLogin ? <User clickUserData={this.clickLogout} /> : <Guest clickData={this.clickLogin}/>}
+      </div>
+    )
+  }
 }
-
-export default App;
+export default App
