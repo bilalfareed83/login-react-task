@@ -1,33 +1,28 @@
-import React, {Component} from 'react';
-import User from './users'
-import Guest from './guest';
-
-
+import React, { Component } from "react";
+import User from "./users";
+import Guest from "./guest";
 
 class App extends Component {
   state = {
-    isLogin: false
-  }
+    isLoggedIn: false
+  };
 
-  clickLogin = () => {
-    console.log('You are Login')
-    this.setState({ isLogin: true })
-  }
+  // single statement functions should be in one line
+  login = () => this.setState({ isLoggedIn: true });
 
-  
-  clickLogout = () => {
-    console.log('You are Logout')
-    this.setState({ isLogin: false })
-  }
-
+  logout = () => this.setState({ isLoggedIn: false });
 
   render() {
-    console.log(this.state.isLogin)
     return (
       <div>
-        { this.state.isLogin ? <User clickUserData={this.clickLogout} /> : <Guest clickData={this.clickLogin}/>}
+        {/* Use meaningful names for props and variables */}
+        {this.state.isLoggedIn ? (
+          <User logout={this.logout} />
+        ) : (
+          <Guest login={this.login} />
+        )}
       </div>
-    )
+    );
   }
 }
-export default App
+export default App;
